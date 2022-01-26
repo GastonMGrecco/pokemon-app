@@ -11,8 +11,8 @@ import {useNavigate} from 'react-router-dom';
 const Pokedex = () => {
     const getNombre=useSelector(state=>state.usuario);
     const [pokemons,setPokemons]=useState([]);
-    const [boton,setBoton]=useState(0);
-    const [contador,setContador]=useState(0)
+   // const [boton,setBoton]=useState(0);
+   // const [contador,setContador]=useState(0)
     const [tipo,setTipo]=useState([]);
     const [num,setNum]=useState("0");
     const [nombre,setNombre]=useState();
@@ -24,7 +24,7 @@ const Pokedex = () => {
         navigate(`/pokedex/${nombre}/`)
       
     }
-    
+    /*
     const sumar=()=>{
         if(boton<54){
             setBoton(boton + 1)
@@ -39,7 +39,7 @@ const Pokedex = () => {
         
         }
     }
-    
+    */
     useEffect(()=>
         {   
             axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=1&limit=20`)
@@ -48,14 +48,21 @@ const Pokedex = () => {
         useEffect(()=>
         {   if(num!=="0"){
             axios.get(`https://pokeapi.co/api/v2/type/${num}/`)
-            .then(res=>setTipo(res?.data.pokemon))
+            .then(res=>setTipo(res?.data?.pokemon))
         }
         },[num])
+        console.log(tipo)
 
     return (
-        <div>
+        <div className='pokedex'>
            
-           <div> Hola {getNombre}</div>
+           <div className='saludo'> Hola {getNombre}!</div>
+           <form onSubmit={submit}>
+                <div className='ingreso'>
+                    <input id="usuario" value={nombre}onChange={e=>setNombre(e.target.value)}></input>
+                    <button className='pokeboton'></button>
+                </div>
+           </form>
            <select onChange={e=>setNum(e.target.value)}>
                 <option value="0">Todos los pokemons</option>
                 <option value="1">Normales</option>
@@ -79,23 +86,16 @@ const Pokedex = () => {
                 <option value="20" >Sombra</option>
                 <option value="19" >Desconocido</option>
            </select>
-           <button value="anterior"style={boton===0?{  visibility: "hidden"}: {visibility: "visible"}}onClick={restar}>anterior</button>
-           <button value={boton}onChange={e=>setBoton(e.target.value)}>{boton}</button>
-           <button value="siguiente"style={boton===54?{  visibility: "hidden"}: {visibility: "visible"}}onClick={sumar}>siguiente</button>
-           <form onSubmit={submit}>
-
-           <input value={nombre}onChange={e=>setNombre(e.target.value)}></input>
-           <button>Buscar</button>
-
-           </form>
-           
+          {/*   <button value="anterior"style={boton===0?{  visibility: "hidden"}: {visibility: "visible"}}onClick={restar}>anterior</button>
+                <button value={boton}onChange={e=>setBoton(e.target.value)}>{boton}</button>
+    <button value="siguiente"style={boton===54?{  visibility: "hidden"}: {visibility: "visible"}}onClick={sumar}>siguiente</button>*/}
         <ul>
             {num==="0"?pokemons.map(pokemon=>(
                 
                 <Tarjeta key={pokemon?.url} url={pokemon?.url}/>
                  )):tipo.map(pokemon=>(
                 
-                    <Tarjeta key={pokemon?.pokemon.url} url={pokemon?.pokemon.url}/>
+                    <Tarjeta key={pokemon?.pokemon?.url} url={pokemon?.pokemon?.url}/>
                      ))}
         </ul>
         </div>
