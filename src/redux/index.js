@@ -9,10 +9,10 @@ const reducer = (state = INITIAL_STATE, action) => {
         case "USUARIO": 
                         return  {...state, usuario:action.payload}
             
-            break;
+           
     
         default: return state;
-            break;
+           
     }
 
 }
