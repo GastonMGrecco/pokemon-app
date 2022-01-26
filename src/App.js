@@ -3,6 +3,8 @@ import Input from './Routes/Input';
 import Pokedex from "./Routes/Pokedex";
 import Proteccion from "./Routes/Proteccion";
 import PokemonId from "./Routes/PokemonId";
+import './App.css';
+
 function App() {
   return (
     <div className="App">

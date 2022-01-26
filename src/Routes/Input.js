@@ -18,9 +18,14 @@ const Input = () => {
     return (
         
             <form className='formulario' onSubmit={submit}>
-                <label htmlFor="usuario">¿Cómo te llamas?</label>
-                <input type= "text"id="usuario" value={nombre} onChange={e=>setNombre(e.target.value)} /> 
-                <button>Ingresar</button>
+                <div className='ash'/>
+                <label htmlFor="usuario">¡Hola entrenador!,
+                coloca tu nombre para comenzar.</label>
+                <div className='ingreso'>
+                    <input type= "text"id="usuario" value={nombre} onChange={e=>setNombre(e.target.value)} /> 
+                    <button className='pokeboton'/>
+                </div>
+                
             </form>              
        
     );
